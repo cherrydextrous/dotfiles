@@ -1,5 +1,8 @@
 return {
-
+    {
+      "christoomey/vim-tmux-navigator",
+      lazy = false
+    },
     {
         "nvim-treesitter/nvim-treesitter",
         event = { "BufReadPre", "BufNewFile" },
