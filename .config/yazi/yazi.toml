@@ -1,0 +1,67 @@
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+[mgr]
+ratio = [2, 4, 3]
+sort_by = "alphabetical"
+sort_sensitive = false
+sort_reverse = false
+sort_dir_first = true
+sort_translit = false
+linemode = "none"
+show_hidden = true
+show_symlink = true
+scrolloff = 5
+mouse_events = ["click", "scroll"]
+title_format = "Yazi: {cwd}"
+
+[preview]
+wrap = "no"
+tab_size = 2
+max_width = 1200
+max_height = 1000
+cache_dir = ""
+image_delay = 30
+image_filter = "triangle"
+image_quality = 75
+sixel_fraction = 15
+ueberzug_scale = 1
+ueberzug_offset = [ 0, 0, 0, 0 ]
+
+[opener]
+edit = [
+  { run = '${EDITOR:-nvim} "$@"', desc = "$EDITOR", block = true, for = "unix"},
+]
+open = [
+  { run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
+]
+reveal = [
+  { run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
+]
+extract = [
+  { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
+]
+play = [
+  { run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
+]
+
+[open]
+rules = [
+  #Folder
+  { name = "*/", use = [ "edit", "open", "reveal" ] },
+  #Text
+  { mime = "text/*", use = [ "edit", "reveal" ] },
+  #Image
+  { mime = "image/*", use = [ "open", "reveal" ] },
+  #Media
+  { mime = "{audio,video}/*", use = [ "play", "reveal" ] },
+  #Archive
+  { mime = "application/{,g}zip", use = [ "extract", "reveal" ] },
+  { mime = "application/{tar,bzip*,7z*,xz,rar}", use = [ "extract", "reveal" ] },
+  #JSON
+  { mime = "application/{json,ndjson}", use = [ "edit", "reveal" ] },
+  { mime = "*/javascript", use = [ "edit", "reveal" ] },
+  #Empty File
+  { mime = "inode/empty", use = [ "edit", "reveal" ] },
+  #Fallback
+  { name = "*", use = [ "open", "reveal" ] },
+]
