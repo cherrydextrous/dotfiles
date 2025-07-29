@@ -20,6 +20,3 @@ $ git clone https://github.com/cherrydextrous/dotfiles.git
 $ cd dotfiles
 
 $ stow .
-
-For more information: https://www.youtube.com/watch?v=y6XCebnB9gs&t=182s
-
