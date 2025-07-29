@@ -22,7 +22,6 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-alias astro='astroterm --color --constellations --speed 10000 --fps 64 --city London'
 
 #Snippets
 zinit snippet OMZP::git
@@ -65,10 +64,10 @@ alias grep='grep --color=auto'
 alias cd='z'
 alias cat='bat'
 alias c='clear'
-alias yay='yay -S'
 alias nvim='nvim'
 alias dysk='sudo dysk'
-alias w='sudo webcamize'
+alias wcam='sudo webcamize'
+alias astro='astroterm --color --constellations --speed 10000 --fps 64 --city London'
 alias install='sudo pacman -S'
 alias uninstall='sudo pacman -Rcns'
 alias packages='sudo pacman -Qe'
@@ -82,6 +81,9 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+#Keybinds
+bindsym print exec --no-startup-id slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
+
 #Steam
 alias celeste='nohup steam steam://rungameid/504230 & exit'
 alias balatro='nohup steam steam://rungameid/2379780 & exit'
@@ -94,3 +96,8 @@ alias f='nohup firefox-developer-edition & exit'
 
 #Start
 fastfetch
+
+if [ -z "$TMUX" ]
+then
+    tmux attach -t TMUX || tmux new -s TMUX
+fi
